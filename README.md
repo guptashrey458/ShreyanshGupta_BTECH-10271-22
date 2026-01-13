@@ -126,4 +126,3 @@ To run this project locally:
 **Roll No**: 10271-22
 **Course**: B.Tech
 
-*Built with passion and pixel-perfect precision.*
