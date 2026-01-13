@@ -5,7 +5,7 @@ interface LandingScrollAnimationProps {
   frameCount?: number;
 }
 
-export default function LandingScrollAnimation({ frameCount = 120 }: LandingScrollAnimationProps) {
+export default function LandingScrollAnimation({ frameCount = 25 }: LandingScrollAnimationProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
@@ -29,8 +29,10 @@ export default function LandingScrollAnimation({ frameCount = 120 }: LandingScro
     // Helper to load a single image
     const loadImage = (index: number) => {
       const img = new Image();
-      // Use the static placeholder since frames are missing in this environment
-      img.src = '/frames/frame_000.png';
+      // Frames are stored as /frames/ezgif-frame-XXX.jpg (1-indexed based on file listing)
+      // Files are ezgif-frame-001.jpg to ezgif-frame-025.jpg
+      const paddedIndex = (index + 1).toString().padStart(3, '0');
+      img.src = `/frames/ezgif-frame-${paddedIndex}.jpg`;
       
       img.onload = () => {
         if (isMounted) {
@@ -44,8 +46,7 @@ export default function LandingScrollAnimation({ frameCount = 120 }: LandingScro
       };
       
        img.onerror = () => {
-             // Fallback to prevent hanging
-             console.warn(`Failed to load frame for index ${index}`);
+             console.warn(`Failed to load frame ezgif-frame-${paddedIndex}.jpg`);
              loadedCount++;
              if (loadedCount === frameCount) {
                 setImages(loadedImages);

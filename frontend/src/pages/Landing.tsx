@@ -8,7 +8,7 @@ export default function Landing() {
     <div className="relative bg-cinematic-bg text-white overflow-hidden font-sans selection:bg-cyan-glow selection:text-cinematic-bg">
       {/* Background Scroll Animation */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <LandingScrollAnimation frameCount={120} />
+        <LandingScrollAnimation frameCount={25} />
       </div>
 
       {/* Content Overlay Container - Matches height of scroll animation */}
