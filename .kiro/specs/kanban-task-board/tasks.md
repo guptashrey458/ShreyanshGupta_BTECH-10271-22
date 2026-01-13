@@ -6,7 +6,7 @@ Full-stack Kanban task board implementation using Node.js/Express backend with M
 
 ## Tasks
 
-- [-] 1. Project Setup and Configuration
+- [x] 1. Project Setup and Configuration
   - Initialize separate backend/ and frontend/ project directories
   - Set up package.json files with required dependencies for each
   - Configure development environment and scripts
@@ -15,15 +15,15 @@ Full-stack Kanban task board implementation using Node.js/Express backend with M
   - **Code principles**: Modular setup files, reusable config utilities, clear folder structure
   - _Requirements: 12.2, 12.3_
 
-- [ ] 2. Backend Database and Models
-  - [ ] 2.1 Set up MongoDB connection and configuration
+- [x] 2. Backend Database and Models
+  - [x] 2.1 Set up MongoDB connection and configuration
     - Create database connection module with environment variable support
     - Configure Mongoose with proper error handling
     - **Commits**: `git commit -m "Add MongoDB connection config"` → `git commit -m "Implement connection error handling"`
     - **Code principles**: Single responsibility config module, reusable connection utility
     - _Requirements: 12.1_
 
-  - [ ] 2.2 Implement User model with validation
+  - [x] 2.2 Implement User model with validation
     - Create User schema with email, password, name fields
     - Add password hashing middleware using bcrypt
     - Implement comparePassword method for authentication
@@ -35,7 +35,7 @@ Full-stack Kanban task board implementation using Node.js/Express backend with M
     - **Property 1: Password Hashing**
     - **Validates: Requirements 1.4**
 
-  - [ ] 2.4 Implement Task model with validation
+  - [x] 2.4 Implement Task model with validation
     - Create Task schema with userId, title, description, status, dueDate fields
     - Add proper indexing for userId and status fields
     - Implement status enum validation
