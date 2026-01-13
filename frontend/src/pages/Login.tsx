@@ -1,98 +1,110 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/auth';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Kanban, CheckSquare, Loader2 } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { Loader2, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Layout } from '@/components/Layout';
 
 export default function Login() {
-  const navigate = useNavigate();
-  const { signIn } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.trim() || !password) return;
+    setIsSubmitting(true);
 
-    setIsLoading(true);
-    const { error } = await signIn(email.trim(), password);
-    setIsLoading(false);
+    const { error } = await signIn(email, password);
 
     if (error) {
       toast.error(error.message);
-    } else {
-      navigate('/');
-    }
+      setIsSubmitting(false);
+    } 
+    // Navigation is handled by auth state change in context or here if successful
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted/20 px-4">
-      <div className="w-full max-w-md animate-fade-in">
-        <div className="flex flex-col items-center mb-8">
-          <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 text-primary-foreground mb-4 shadow-lg animate-bounce-in">
-            <div className="relative">
-              <Kanban className="h-7 w-7" />
-              <CheckSquare className="h-3.5 w-3.5 absolute -top-1 -right-1 text-green-400" />
-            </div>
-          </div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-            TaskFlow
-          </h1>
-          <p className="text-muted-foreground mt-1 text-center">Organize your work, your way</p>
-        </div>
+    <Layout>
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="w-full max-w-md relative z-10"
+        >
+          {/* Glass Card Background */}
+          <div className="absolute inset-0 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl" />
+          
+          <div className="relative z-10 p-8">
+              <div className="text-center mb-10">
+              <Link to="/" className="inline-block mb-4">
+                  <span className="text-2xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60 hover:to-cyan-glow transition-all duration-300">
+                  TaskFlow
+                  </span>
+              </Link>
+              <h1 className="text-3xl font-bold tracking-tight text-white mb-2">Welcome Back</h1>
+              <p className="text-white/40 text-sm">Sign in to continue your workflow</p>
+              </div>
 
-        <Card className="shadow-xl border-0 bg-card/95 backdrop-blur-sm">
-          <CardHeader className="text-center pb-6">
-            <CardTitle className="text-2xl">Welcome back</CardTitle>
-            <CardDescription>Sign in to your account to continue</CardDescription>
-          </CardHeader>
-          <form onSubmit={handleSubmit}>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  autoComplete="email"
-                />
+              <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-4">
+                  <div className="space-y-2 group">
+                  <label className="text-xs font-medium uppercase tracking-wider text-white/50 group-focus-within:text-cyan-glow transition-colors">Email</label>
+                  <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-glow/50 focus:ring-1 focus:ring-cyan-glow/50 transition-all duration-300 backdrop-blur-sm"
+                      placeholder="name@example.com"
+                  />
+                  </div>
+                  
+                  <div className="space-y-2 group">
+                  <div className="flex justify-between items-center">
+                      <label className="text-xs font-medium uppercase tracking-wider text-white/50 group-focus-within:text-cyan-glow transition-colors">Password</label>
+                      <a href="#" className="text-xs text-white/30 hover:text-cyan-glow transition-colors">Forgot?</a>
+                  </div>
+                  <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-glow/50 focus:ring-1 focus:ring-cyan-glow/50 transition-all duration-300 backdrop-blur-sm"
+                      placeholder="••••••••"
+                  />
+                  </div>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  autoComplete="current-password"
-                />
-              </div>
-            </CardContent>
-            <CardFooter className="flex flex-col gap-4">
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Sign In
-              </Button>
-              <p className="text-sm text-muted-foreground text-center">
-                Don't have an account?{' '}
-                <Link to="/register" className="text-primary hover:underline font-medium">
-                  Sign up
-                </Link>
+
+              <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-white text-black font-bold h-12 rounded-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:hover:scale-100"
+              >
+                  {isSubmitting ? (
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                  ) : (
+                  <>
+                      Sign In <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </>
+                  )}
+              </button>
+              </form>
+
+              <div className="mt-8 text-center">
+              <p className="text-sm text-white/40">
+                  Don't have an account?{' '}
+                  <Link to="/register" className="text-white hover:text-cyan-glow font-medium transition-colors">
+                  create one now
+                  </Link>
               </p>
-            </CardFooter>
-          </form>
-        </Card>
+              </div>
+          </div>
+        </motion.div>
       </div>
-    </div>
+    </Layout>
   );
 }

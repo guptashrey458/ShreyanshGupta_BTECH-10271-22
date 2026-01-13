@@ -21,6 +21,9 @@ const config: Config = {
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        // Cinematic Dark Theme
+        'cinematic-bg': '#050505',
+        'cyan-glow': '#00f2fe',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
@@ -66,6 +69,10 @@ const config: Config = {
       boxShadow: {
         card: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
         'card-hover': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+        'glow': '0 0 20px -5px rgba(0, 242, 254, 0.3)',
+      },
+      backdropBlur: {
+        xs: '2px',
       },
       keyframes: {
         'accordion-down': {
@@ -88,7 +95,7 @@ const config: Config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'fade-in': 'fade-in 0.3s ease-out',
+        'fade-in': 'fade-in 0.8s ease-out forwards',
         'slide-up': 'slide-up 0.4s ease-out',
       },
     },

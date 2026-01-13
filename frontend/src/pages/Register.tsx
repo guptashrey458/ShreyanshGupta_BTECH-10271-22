@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/auth';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { LayoutGrid, Loader2 } from 'lucide-react';
+import { Loader2, ArrowRight } from 'lucide-react';
 import { toast } from 'sonner';
+import { motion } from 'framer-motion';
+import { Layout } from '@/components/Layout';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -42,77 +40,97 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4">
-      <div className="w-full max-w-md animate-slide-up">
-        <div className="flex flex-col items-center mb-8">
-          <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-primary text-primary-foreground mb-4">
-            <LayoutGrid className="h-7 w-7" />
-          </div>
-          <h1 className="text-2xl font-bold text-foreground">TaskFlow</h1>
-          <p className="text-muted-foreground mt-1">Organize your work, your way</p>
-        </div>
+    <Layout>
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="w-full max-w-md relative z-10"
+        >
+          <div className="absolute inset-0 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl" />
+          
+          <div className="relative z-10 p-8">
+            <div className="text-center mb-8">
+              <Link to="/" className="inline-block mb-4">
+                  <span className="text-2xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60 hover:to-cyan-glow transition-all duration-300">
+                  TaskFlow
+                  </span>
+              </Link>
+              <h1 className="text-3xl font-bold tracking-tight text-white mb-2">Create Account</h1>
+              <p className="text-white/40 text-sm">Join thousands of productive users today</p>
+            </div>
 
-        <Card>
-          <CardHeader className="text-center">
-            <CardTitle>Create an account</CardTitle>
-            <CardDescription>Get started with TaskFlow today</CardDescription>
-          </CardHeader>
-          <form onSubmit={handleSubmit}>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
-                <Input
-                  id="name"
-                  type="text"
-                  placeholder="John Doe"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  autoComplete="name"
-                />
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-4">
+                <div className="space-y-2 group">
+                  <label className="text-xs font-medium uppercase tracking-wider text-white/50 group-focus-within:text-cyan-glow transition-colors">Full Name</label>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-glow/50 focus:ring-1 focus:ring-cyan-glow/50 transition-all duration-300 backdrop-blur-sm"
+                    placeholder="John Doe"
+                    autoComplete="name"
+                  />
+                </div>
+
+                <div className="space-y-2 group">
+                  <label className="text-xs font-medium uppercase tracking-wider text-white/50 group-focus-within:text-cyan-glow transition-colors">Email</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-glow/50 focus:ring-1 focus:ring-cyan-glow/50 transition-all duration-300 backdrop-blur-sm"
+                    placeholder="you@example.com"
+                    autoComplete="email"
+                  />
+                </div>
+                
+                <div className="space-y-2 group">
+                  <label className="text-xs font-medium uppercase tracking-wider text-white/50 group-focus-within:text-cyan-glow transition-colors">Password</label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    minLength={6}
+                    className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-glow/50 focus:ring-1 focus:ring-cyan-glow/50 transition-all duration-300 backdrop-blur-sm"
+                    placeholder="••••••••"
+                    autoComplete="new-password"
+                  />
+                  <p className="text-xs text-white/30 text-right">Min 6 chars</p>
+                </div>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  autoComplete="email"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  minLength={6}
-                  autoComplete="new-password"
-                />
-                <p className="text-xs text-muted-foreground">Must be at least 6 characters</p>
-              </div>
-            </CardContent>
-            <CardFooter className="flex flex-col gap-4">
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Create Account
-              </Button>
-              <p className="text-sm text-muted-foreground text-center">
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-white text-black font-bold h-12 rounded-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:hover:scale-100"
+              >
+                {isLoading ? (
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                ) : (
+                  <>
+                    Sign Up <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </button>
+            </form>
+
+            <div className="mt-8 text-center">
+              <p className="text-sm text-white/40">
                 Already have an account?{' '}
-                <Link to="/login" className="text-primary hover:underline font-medium">
+                <Link to="/login" className="text-white hover:text-cyan-glow font-medium transition-colors">
                   Sign in
                 </Link>
               </p>
-            </CardFooter>
-          </form>
-        </Card>
+            </div>
+          </div>
+        </motion.div>
       </div>
-    </div>
+    </Layout>
   );
 }
