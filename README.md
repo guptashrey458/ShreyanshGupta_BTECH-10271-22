@@ -1,77 +1,76 @@
-# 🌌 Kanban Flow - Cinematic Task Management System
+# 🌌 Kanban Flow - Task Management System
 
-**Kanban Flow** is a high-performance, aesthetically stunning task management application designed with a focus on deep work and fluidity. It features a custom "anti-gravity" glassmorphic UI, seamless drag-and-drop interactions, and a robust RESTful backend.
+**Kanban Flow** is a task management application built with React and Node.js. It provides a clean interface for organizing tasks across different stages with drag-and-drop functionality.
+
+## 🚀 Live Application
+
+**Full Stack App**: [https://kanban-flow-hqim.vercel.app/](https://kanban-flow-hqim.vercel.app/)
+
+> **Note**: Backend is hosted on Render's free tier, so initial loading may take 30-60 seconds as the server spins up from sleep mode.
 
 ---
 
-## 🎨 Design Philosophy
--   **Cinematic Dark Mode**: Pure near-black (`#050505`) canvas with ambient cyan glows.
--   **Glassmorphism**: Multi-layered, blurred interfaces using `backdrop-filter`.
--   **Anti-Gravity Motion**: Scroll-linked animations and floating text elements powered by **Framer Motion** and **HTML5 Canvas**.
--   **Fluidity**: Drag-and-drop tasks feel weightless yet physical.
+## 🎨 Features
+- **Task Management**: Create, update, and delete tasks
+- **Kanban Board**: Drag-and-drop tasks between columns (Pending, In Progress, Completed)
+- **User Authentication**: Secure login and registration system
+- **Responsive Design**: Works on desktop and mobile devices
+- **Real-time Updates**: Immediate UI feedback for all actions
 
 ## 🛠️ Tech Stack
 
-### Frontend (Client)
--   **Framework**: [React](https://react.dev/) (Vite)
--   **Language**: TypeScript
--   **Styling**: [Tailwind CSS](https://tailwindcss.com/) (Custom Config)
--   **Animations**: [Framer Motion](https://www.framer.com/motion/) + HTML5 Canvas API
--   **State Management**: [TanStack Query](https://tanstack.com/query) (Server State)
--   **Drag & Drop**: `@hello-pangea/dnd`
--   **Icons**: [Lucide React](https://lucide.dev/)
+### Frontend
+-   **Framework**: React with TypeScript
+-   **Build Tool**: Vite
+-   **Styling**: Tailwind CSS
+-   **Animations**: Framer Motion
+-   **State Management**: TanStack Query
+-   **Drag & Drop**: @hello-pangea/dnd
+-   **Icons**: Lucide React
 
-### Backend (API)
--   **Runtime**: [Node.js](https://nodejs.org/)
--   **Framework**: [Express.js](https://expressjs.com/)
--   **Database**: [MongoDB Atlas](https://www.mongodb.com/atlas)
+### Backend
+-   **Runtime**: Node.js
+-   **Framework**: Express.js
+-   **Database**: MongoDB Atlas
 -   **ODM**: Mongoose
--   **Authentication**: JWT (JSON Web Tokens) & bcryptjs for security
+-   **Authentication**: JWT with bcryptjs
 
-### Infrastructure
--   **Hosting**: Vercel (Monorepo Deployment)
--   **CI/CD**: Git + Vercel Automatic Deployments
+### Deployment
+-   **Frontend**: Vercel
+-   **Backend**: Render
+-   **Database**: MongoDB Atlas (Cloud)
 
 ---
 
 ## 🏗️ Architecture
 
-The application follows a modern **Client-Server Architecture** deployed as a monorepo.
+The application uses a separated frontend-backend architecture:
 
-```mermaid
-graph TD
-    Client[React Frontend] -->|REST API Requests| API[Express Backend]
-    Client -->|Interactions| CDN[Vercel Edge Network]
-    API -->|Read/Write| DB[(MongoDB Atlas)]
-    
-    subgraph "Vercel Deployment"
-        Client
-        API
-    end
-    
-    subgraph "External Services"
-        DB
-    end
+```
+Frontend (Vercel)          Backend (Render)          Database
+├── React SPA         →    ├── Express API      →   ├── MongoDB Atlas
+├── Static Assets          ├── JWT Auth              ├── User Collection
+├── Client Routing         ├── Task Routes           └── Task Collection
+└── API Calls              └── CORS Configuration
 ```
 
-## ✨ Key Features
+**Components:**
+- **Frontend**: Single Page Application hosted on Vercel
+- **Backend**: RESTful API hosted on Render
+- **Database**: MongoDB Atlas for data persistence
 
-1.  **Immersive Landing Page**:
-    -   Scroll-driven storytelling with a 25-frame cinematic background animation.
-    -   Floating "anti-gravity" typography.
-    
-2.  **Secure Authentication**:
-    -   Glassmorphic Login/Register forms.
-    -   JWT-based session management.
-    
-3.  **Interactive Kanban Board**:
-    -   **Drag & Drop**: Move tasks smoothly between columns (Pending, In Progress, Completed).
-    -   **Real-time Updates**: Optimistic UI updates powered by React Query.
-    -   **Smart Indicators**: Visual cues for overdue tasks and priority.
+**Scalability**: The architecture can be extended to support multi-team development with its clear separation of concerns between frontend and backend.
 
-4.  **Profile Management**:
-    -   Update user details securely.
-    -   "Danger Zone" for sensitive actions.
+## ✨ Application Flow
+
+1.  **Landing Page**: Introduction to the application with navigation options
+2.  **Authentication**: User registration and login system
+3.  **Dashboard**: Main kanban board with three columns:
+    -   **Pending**: New tasks waiting to be started
+    -   **In Progress**: Tasks currently being worked on
+    -   **Completed**: Finished tasks
+4.  **Task Management**: Create, edit, delete, and move tasks between columns
+5.  **Profile**: User account management
 
 ---
 
@@ -102,9 +101,13 @@ To run this project locally:
     *backend/.env*:
     ```env
     PORT=5000
-    MONGODB_URI=your_mongodb_connection_string
+    MONGO_URI=your_mongodb_connection_string
     JWT_SECRET=your_secret_key
-    FRONTEND_URL=http://localhost:3000
+    ```
+    
+    *frontend/.env*:
+    ```env
+    VITE_API_URL=http://localhost:5000/api
     ```
 
 4.  **Run Locally**
@@ -117,6 +120,35 @@ To run this project locally:
     cd frontend
     npm run dev
     ```
+
+## 🌐 Deployment Architecture
+
+**Frontend (Vercel)**:
+- Hosts the React application as static files
+- Handles client-side routing
+- Connects to backend API
+
+**Backend (Render)**:
+- Hosts the Express.js API server
+- Manages database connections
+- Handles authentication and business logic
+
+**Database (MongoDB Atlas)**:
+- Cloud-hosted MongoDB database
+- Stores user accounts and task data
+- Provides data persistence
+
+## 📝 Development Notes
+
+This project demonstrates:
+- Full-stack JavaScript development
+- RESTful API design
+- Modern React patterns with hooks
+- JWT authentication implementation
+- Cloud deployment strategies
+- Responsive web design
+
+The codebase is structured for potential team collaboration and can be extended for multi-team environments with proper API versioning and microservices architecture.
 
 ---
 
