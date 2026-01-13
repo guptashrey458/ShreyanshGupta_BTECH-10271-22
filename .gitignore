@@ -49,3 +49,4 @@ pids
 
 # Kiro specs directory (keep local only)
 .kiro/
+.vercel
