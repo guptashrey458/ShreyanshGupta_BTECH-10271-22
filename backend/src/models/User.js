@@ -29,6 +29,26 @@ const userSchema = new mongoose.Schema({
     trim: true,
     maxlength: [50, 'Name cannot exceed 50 characters'],
     minlength: [1, 'Name cannot be empty']
+  },
+  avatar: {
+    type: String,
+    default: null // URL to profile picture
+  },
+  role: {
+    type: String,
+    enum: {
+      values: ['user', 'admin', 'manager'],
+      message: 'Role must be one of: user, admin, manager'
+    },
+    default: 'user'
+  },
+  isActive: {
+    type: Boolean,
+    default: true
+  },
+  lastLoginAt: {
+    type: Date,
+    default: null
   }
 }, {
   timestamps: true, // Automatically adds createdAt and updatedAt

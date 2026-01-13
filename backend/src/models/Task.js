@@ -11,6 +11,12 @@ const taskSchema = new mongoose.Schema({
     required: [true, 'User ID is required'],
     index: true // Index for efficient user-specific queries
   },
+  boardId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Board',
+    required: [true, 'Board ID is required'],
+    index: true // Index for efficient board-specific queries
+  },
   title: {
     type: String,
     required: [true, 'Task title is required'],
@@ -32,6 +38,48 @@ const taskSchema = new mongoose.Schema({
     },
     default: 'pending',
     index: true // Index for efficient status-based queries
+  },
+  priority: {
+    type: String,
+    enum: {
+      values: ['low', 'medium', 'high', 'urgent'],
+      message: 'Priority must be one of: low, medium, high, urgent'
+    },
+    default: 'medium'
+  },
+  category: {
+    type: String,
+    trim: true,
+    maxlength: [30, 'Category cannot exceed 30 characters'],
+    default: 'General'
+  },
+  tags: [{
+    type: String,
+    trim: true,
+    maxlength: [20, 'Tag cannot exceed 20 characters']
+  }],
+  assignedTo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    default: null // Can be assigned to another user
+  },
+  estimatedHours: {
+    type: Number,
+    min: [0, 'Estimated hours cannot be negative'],
+    max: [1000, 'Estimated hours cannot exceed 1000']
+  },
+  actualHours: {
+    type: Number,
+    min: [0, 'Actual hours cannot be negative'],
+    default: 0
+  },
+  completedAt: {
+    type: Date,
+    default: null
+  },
+  position: {
+    type: Number,
+    default: 0 // For drag-and-drop ordering within columns
   },
   dueDate: {
     type: Date,
@@ -83,6 +131,17 @@ const taskSchema = new mongoose.Schema({
  * This supports queries like "get all pending tasks for user X"
  */
 taskSchema.index({ userId: 1, status: 1 });
+
+/**
+ * Compound index for efficient board + status queries
+ * This supports queries like "get all pending tasks for board X"
+ */
+taskSchema.index({ boardId: 1, status: 1 });
+
+/**
+ * Compound index for board + position queries (for drag-and-drop ordering)
+ */
+taskSchema.index({ boardId: 1, status: 1, position: 1 });
 
 /**
  * Index for due date queries (e.g., overdue tasks, upcoming deadlines)
