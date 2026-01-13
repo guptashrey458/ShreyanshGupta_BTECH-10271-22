@@ -14,9 +14,10 @@
     "test:frontend": "cd frontend && npm test",
     "test": "npm run test:backend && npm run test:frontend",
     "build:frontend": "cd frontend && npm run build",
-    "build": "npm run build:frontend",
+    "build": "cd frontend && npm install && npm run build",
     "start:backend": "cd backend && npm start",
-    "start": "npm run start:backend"
+    "start": "npm run start:backend",
+    "postinstall": "cd frontend && npm install"
   },
   "keywords": [
     "kanban",
@@ -29,6 +30,15 @@
   ],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.5.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "joi": "^17.9.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
+  },
   "devDependencies": {
     "concurrently": "^8.2.0"
   },
