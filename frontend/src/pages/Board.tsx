@@ -5,7 +5,6 @@ import { TaskDialog } from '@/components/TaskDialog';
 import { useTasks } from '@/hooks/useTasks';
 import type { CreateTaskInput, UpdateTaskInput } from '@/types';
 import { Layout } from '@/components/Layout';
-import { User } from '@/types';
 
 export default function Board() {
   const [dialogOpen, setDialogOpen] = useState(false);

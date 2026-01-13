@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { useScroll, useTransform, motion } from 'framer-motion';
+import { useScroll, useTransform } from 'framer-motion';
 
 interface LandingScrollAnimationProps {
   frameCount?: number;
@@ -80,9 +80,9 @@ export default function LandingScrollAnimation({ frameCount = 25 }: LandingScrol
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
-      const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
-      const x = (canvas.width / 2) - (img.width / 2) * scale;
-      const y = (canvas.height / 2) - (img.height / 2) * scale;
+      // const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+      // const x = (canvas.width / 2) - (img.width / 2) * scale;
+      // const y = (canvas.height / 2) - (img.height / 2) * scale;
       
       // Use 'contain' logic instead of cover if we want to see the whole object, 
       // but 'cover' usually looks better for full-screen backgrounds.

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '@/lib/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import { Loader2, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -11,7 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { signIn } = useAuth();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
