@@ -5,7 +5,6 @@
 ---
 
 ## 🎨 Design Philosophy
-The UI is crafted to be "Awwwards-ready", breaking away from standard SaaS templates.
 -   **Cinematic Dark Mode**: Pure near-black (`#050505`) canvas with ambient cyan glows.
 -   **Glassmorphism**: Multi-layered, blurred interfaces using `backdrop-filter`.
 -   **Anti-Gravity Motion**: Scroll-linked animations and floating text elements powered by **Framer Motion** and **HTML5 Canvas**.
