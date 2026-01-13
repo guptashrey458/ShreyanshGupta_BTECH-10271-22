@@ -1,8 +1,8 @@
-# 🌌 Kanban Flow - Task Management System
+# Kanban Flow - Task Management System
 
 **Kanban Flow** is a task management application built with React and Node.js. It provides a clean interface for organizing tasks across different stages with drag-and-drop functionality.
 
-## 🚀 Live Application
+## Live Application
 
 **Full Stack App**: [https://kanban-flow-hqim.vercel.app/](https://kanban-flow-hqim.vercel.app/)
 
@@ -10,14 +10,14 @@
 
 ---
 
-## 🎨 Features
+## Features
 - **Task Management**: Create, update, and delete tasks
 - **Kanban Board**: Drag-and-drop tasks between columns (Pending, In Progress, Completed)
 - **User Authentication**: Secure login and registration system
 - **Responsive Design**: Works on desktop and mobile devices
 - **Real-time Updates**: Immediate UI feedback for all actions
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 -   **Framework**: React with TypeScript
@@ -42,7 +42,7 @@
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 The application uses a separated frontend-backend architecture:
 
@@ -61,7 +61,7 @@ Frontend (Vercel)          Backend (Render)          Database
 
 **Scalability**: The architecture can be extended to support multi-team development with its clear separation of concerns between frontend and backend.
 
-## ✨ Application Flow
+## Application Flow
 
 1.  **Landing Page**: Introduction to the application with navigation options
 2.  **Authentication**: User registration and login system
@@ -74,7 +74,7 @@ Frontend (Vercel)          Backend (Render)          Database
 
 ---
 
-## ⚡ Local Development
+## Local Development
 
 To run this project locally:
 
@@ -121,7 +121,7 @@ To run this project locally:
     npm run dev
     ```
 
-## 🌐 Deployment Architecture
+## Deployment Architecture
 
 **Frontend (Vercel)**:
 - Hosts the React application as static files
@@ -138,7 +138,7 @@ To run this project locally:
 - Stores user accounts and task data
 - Provides data persistence
 
-## 📝 Development Notes
+## Development Notes
 
 This project demonstrates:
 - Full-stack JavaScript development
@@ -152,7 +152,7 @@ The codebase is structured for potential team collaboration and can be extended 
 
 ---
 
-## 📝 Submission Details
+## Submission Details
 **Developer**: Shreyansh Gupta
 **Roll No**: 10271-22
 **Course**: B.Tech
