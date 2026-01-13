@@ -9,7 +9,7 @@
             "src": "frontend/package.json",
             "use": "@vercel/static-build",
             "config": {
-                "distDir": "dist"
+                "distDir": "frontend/dist"
             }
         }
     ],
@@ -19,19 +19,16 @@
             "dest": "/backend/src/app.js"
         },
         {
-            "src": "/(.*)",
-            "dest": "/frontend/$1",
-            "headers": {
-                "Cache-Control": "s-maxage=0"
-            }
-        },
-        {
             "handle": "filesystem"
         },
         {
             "src": "/(.*)",
-            "dest": "/frontend/index.html",
-            "check": true
+            "dest": "/frontend/dist/index.html"
         }
-    ]
+    ],
+    "functions": {
+        "backend/src/app.js": {
+            "maxDuration": 30
+        }
+    }
 }
