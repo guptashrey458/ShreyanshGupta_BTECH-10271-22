@@ -18,6 +18,10 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Routes
+const authRoutes = require('./routes/auth');
+const taskRoutes = require('./routes/tasks');
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   const dbStatus = getConnectionStatus();
@@ -28,6 +32,10 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString()
   });
 });
+
+// API routes
+app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
