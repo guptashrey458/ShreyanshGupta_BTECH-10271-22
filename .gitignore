@@ -46,3 +46,6 @@ pids
 *.pid
 *.seed
 *.pid.lock
+
+# Kiro specs directory (keep local only)
+.kiro/
