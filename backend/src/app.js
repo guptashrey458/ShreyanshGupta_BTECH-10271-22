@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const { connectDB } = require('./config/db');
+const { connectDB, getConnectionStatus } = require('./config/db');
 
 // Load environment variables
 dotenv.config();
@@ -20,13 +20,48 @@ app.use(express.json());
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'Kanban API is running' });
+  const dbStatus = getConnectionStatus();
+  res.json({ 
+    status: 'OK', 
+    message: 'Kanban API is running',
+    database: dbStatus ? 'Connected' : 'Disconnected',
+    timestamp: new Date().toISOString()
+  });
 });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Internal server error' });
+  console.error('Error stack:', err.stack);
+  
+  // Handle different types of errors
+  if (err.name === 'ValidationError') {
+    return res.status(400).json({
+      error: 'Validation failed',
+      details: Object.values(err.errors).map(e => ({
+        field: e.path,
+        message: e.message
+      }))
+    });
+  }
+  
+  if (err.name === 'CastError') {
+    return res.status(400).json({
+      error: 'Invalid ID format'
+    });
+  }
+  
+  if (err.code === 11000) {
+    // Duplicate key error
+    const field = Object.keys(err.keyPattern)[0];
+    return res.status(409).json({
+      error: `${field} already exists`
+    });
+  }
+  
+  // Default error response
+  res.status(err.status || 500).json({ 
+    error: err.message || 'Internal server error' 
+  });
 });
 
 // 404 handler
