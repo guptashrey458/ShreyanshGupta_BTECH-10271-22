@@ -4,7 +4,7 @@
   "description": "Frontend React app for Kanban Task Board",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "./node_modules/.bin/vite",
     "build": "tsc && ./node_modules/.bin/vite build",
     "preview": "vite preview",
     "test": "vitest --run",
