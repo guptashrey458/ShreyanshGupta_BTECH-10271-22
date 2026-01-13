@@ -13,7 +13,15 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    // Allow any localhost origin or any vercel.app origin
+    if (origin.startsWith('http://localhost') || origin.endsWith('.vercel.app')) {
+      return callback(null, true);
+    }
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
 app.use(express.json());
@@ -25,8 +33,8 @@ const taskRoutes = require('./routes/tasks');
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   const dbStatus = getConnectionStatus();
-  res.json({ 
-    status: 'OK', 
+  res.json({
+    status: 'OK',
     message: 'Kanban API is running',
     database: dbStatus ? 'Connected' : 'Disconnected',
     timestamp: new Date().toISOString()
@@ -40,7 +48,7 @@ app.use('/api/tasks', taskRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Error stack:', err.stack);
-  
+
   // Handle different types of errors
   if (err.name === 'ValidationError') {
     return res.status(400).json({
@@ -51,13 +59,13 @@ app.use((err, req, res, next) => {
       }))
     });
   }
-  
+
   if (err.name === 'CastError') {
     return res.status(400).json({
       error: 'Invalid ID format'
     });
   }
-  
+
   if (err.code === 11000) {
     // Duplicate key error
     const field = Object.keys(err.keyPattern)[0];
@@ -65,10 +73,10 @@ app.use((err, req, res, next) => {
       error: `${field} already exists`
     });
   }
-  
+
   // Default error response
-  res.status(err.status || 500).json({ 
-    error: err.message || 'Internal server error' 
+  res.status(err.status || 500).json({
+    error: err.message || 'Internal server error'
   });
 });
 
