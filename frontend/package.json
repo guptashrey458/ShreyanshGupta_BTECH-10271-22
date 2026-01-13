@@ -1,7 +1,7 @@
 {
   "name": "kanban-frontend",
   "version": "1.0.0",
-  "description": "Frontend React app for Kanban Task Board",
+  "description": "Frontend React app for Kanban Task Board - Updated for deployment",
   "type": "module",
   "scripts": {
     "dev": "./node_modules/.bin/vite",
