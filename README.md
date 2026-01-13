@@ -1,177 +1,136 @@
-# Kanban Task Board
+# 🌌 Kanban Flow - Cinematic Task Management System
 
-A full-stack Kanban-style task board application with user authentication, built with Node.js/Express backend and React frontend.
+![Project Banner](https://img.shields.io/badge/Status-Production-00f2fe?style=for-the-badge) ![Tech Stack](https://img.shields.io/badge/Stack-MERN-050505?style=for-the-badge) ![License](https://img.shields.io/badge/License-MIT-white?style=for-the-badge)
 
-## Features
+**Kanban Flow** is a high-performance, aesthetically stunning task management application designed with a focus on deep work and fluidity. It features a custom "anti-gravity" glassmorphic UI, seamless drag-and-drop interactions, and a robust RESTful backend.
 
-- 🔐 User authentication (signup, login, logout)
-- 📋 Personal task management with CRUD operations
-- 🎯 Kanban board with drag-and-drop functionality
-- 📱 Responsive design for mobile and desktop
-- 🔒 Secure JWT-based authentication
-- 🎨 Modern UI with Tailwind CSS
+---
 
-## Tech Stack
+## 🚀 Live Demo
+**Production URL**: [https://shreyansh-gupta-btech-10271-22-emg6kh9tl.vercel.app](https://shreyansh-gupta-btech-10271-22-emg6kh9tl.vercel.app)
 
-### Backend
-- **Node.js** with Express.js
-- **MongoDB** with Mongoose ODM
-- **JWT** for authentication
-- **Joi** for validation
-- **Jest** for testing
+---
 
-### Frontend
-- **React 18** with Vite
-- **React Router** for navigation
-- **Axios** for API calls
-- **react-beautiful-dnd** for drag-and-drop
-- **Tailwind CSS** for styling
-- **Vitest** for testing
+## 🎨 Design Philosophy
+The UI is crafted to be "Awwwards-ready", breaking away from standard SaaS templates.
+-   **Cinematic Dark Mode**: Pure near-black (`#050505`) canvas with ambient cyan glows.
+-   **Glassmorphism**: Multi-layered, blurred interfaces using `backdrop-filter`.
+-   **Anti-Gravity Motion**: Scroll-linked animations and floating text elements powered by **Framer Motion** and **HTML5 Canvas**.
+-   **Fluidity**: Drag-and-drop tasks feel weightless yet physical.
 
-## Project Structure
+## 🛠️ Tech Stack
 
-```
-kanban-task-board/
-├── backend/                 # Express.js API server
-│   ├── src/
-│   │   ├── app.js          # Express app configuration
-│   │   ├── config/         # Database and other configs
-│   │   ├── controllers/    # Route controllers
-│   │   ├── middleware/     # Custom middleware
-│   │   ├── models/         # Mongoose models
-│   │   └── routes/         # API routes
-│   ├── __tests__/          # Backend tests
-│   └── package.json
-├── frontend/               # React application
-│   ├── src/
-│   │   ├── components/     # React components
-│   │   ├── context/        # React context providers
-│   │   ├── services/       # API service functions
-│   │   └── test/           # Test utilities
-│   └── package.json
-└── README.md
-```
+### Frontend (Client)
+-   **Framework**: [React](https://react.dev/) (Vite)
+-   **Language**: TypeScript
+-   **Styling**: [Tailwind CSS](https://tailwindcss.com/) (Custom Config)
+-   **Animations**: [Framer Motion](https://www.framer.com/motion/) + HTML5 Canvas API
+-   **State Management**: [TanStack Query](https://tanstack.com/query) (Server State)
+-   **Drag & Drop**: `@hello-pangea/dnd`
+-   **Icons**: [Lucide React](https://lucide.dev/)
 
-## Quick Start
+### Backend (API)
+-   **Runtime**: [Node.js](https://nodejs.org/)
+-   **Framework**: [Express.js](https://expressjs.com/)
+-   **Database**: [MongoDB Atlas](https://www.mongodb.com/atlas)
+-   **ODM**: Mongoose
+-   **Authentication**: JWT (JSON Web Tokens) & bcryptjs for security
 
-### Prerequisites
+### Infrastructure
+-   **Hosting**: Vercel (Monorepo Deployment)
+-   **CI/CD**: Git + Vercel Automatic Deployments
 
-- Node.js (v16 or higher)
-- MongoDB (local installation or MongoDB Atlas)
-- Git
+---
 
-### Installation
+## 🏗️ Architecture
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd kanban-task-board
-   ```
+The application follows a modern **Client-Server Architecture** deployed as a monorepo.
 
-2. **Set up the backend**
-   ```bash
-   cd backend
-   npm install
-   cp .env.example .env
-   # Edit .env with your MongoDB connection string and JWT secret
-   npm run dev
-   ```
-
-3. **Set up the frontend** (in a new terminal)
-   ```bash
-   cd frontend
-   npm install
-   cp .env.example .env
-   # Edit .env if needed (default API URL should work)
-   npm run dev
-   ```
-
-4. **Access the application**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:5000
-
-### Environment Configuration
-
-#### Backend (.env)
-```env
-MONGO_URI=mongodb://localhost:27017/kanban_board
-JWT_SECRET=your_super_secret_jwt_key_here
-JWT_EXPIRES_IN=7d
-PORT=5000
-NODE_ENV=development
-FRONTEND_URL=http://localhost:3000
+```mermaid
+graph TD
+    Client[React Frontend] -->|REST API Requests| API[Express Backend]
+    Client -->|Interactions| CDN[Vercel Edge Network]
+    API -->|Read/Write| DB[(MongoDB Atlas)]
+    
+    subgraph "Vercel Deployment"
+        Client
+        API
+    end
+    
+    subgraph "External Services"
+        DB
+    end
 ```
 
-#### Frontend (.env)
-```env
-VITE_API_BASE_URL=http://localhost:5000/api
-VITE_APP_NAME=Kanban Task Board
-```
+## ✨ Key Features
 
-## Development
+1.  **Immersive Landing Page**:
+    -   Scroll-driven storytelling with a 25-frame cinematic background animation.
+    -   Floating "anti-gravity" typography.
+    
+2.  **Secure Authentication**:
+    -   Glassmorphic Login/Register forms.
+    -   JWT-based session management.
+    
+3.  **Interactive Kanban Board**:
+    -   **Drag & Drop**: Move tasks smoothly between columns (Pending, In Progress, Completed).
+    -   **Real-time Updates**: Optimistic UI updates powered by React Query.
+    -   **Smart Indicators**: Visual cues for overdue tasks and priority.
 
-### Backend Development
-```bash
-cd backend
-npm run dev          # Start with nodemon
-npm test             # Run tests
-npm run test:watch   # Run tests in watch mode
-npm run test:coverage # Run tests with coverage
-```
+4.  **Profile Management**:
+    -   Update user details securely.
+    -   "Danger Zone" for sensitive actions.
 
-### Frontend Development
-```bash
-cd frontend
-npm run dev          # Start development server
-npm test             # Run tests
-npm run test:watch   # Run tests in watch mode
-npm run build        # Build for production
-```
+---
 
-## API Endpoints
+## ⚡ Local Development
 
-### Authentication
-- `POST /api/auth/signup` - Register new user
-- `POST /api/auth/login` - Login user
-- `GET /api/auth/profile` - Get user profile
-- `PUT /api/auth/profile` - Update user profile
-- `DELETE /api/auth/profile` - Delete user account
+To run this project locally:
 
-### Tasks
-- `POST /api/tasks` - Create new task
-- `GET /api/tasks` - Get all user tasks
-- `GET /api/tasks?status=pending` - Get tasks by status
-- `GET /api/tasks/:id` - Get single task
-- `PUT /api/tasks/:id` - Update task
-- `DELETE /api/tasks/:id` - Delete task
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/guptashreyansh458/ShreyanshGupta_BTECH-10271-22.git
+    cd ShreyanshGupta_BTECH-10271-22
+    ```
 
-## Testing
+2.  **Install Dependencies**
+    ```bash
+    # Install backend dependencies
+    cd backend
+    npm install
+    
+    # Install frontend dependencies
+    cd ../frontend
+    npm install
+    ```
 
-The project uses a dual testing approach:
-- **Unit Tests**: Specific examples and edge cases
-- **Property-Based Tests**: Universal properties across many inputs
+3.  **Environment Setup**
+    Create `.env` files in both `backend` and `frontend` directories.
+    
+    *backend/.env*:
+    ```env
+    PORT=5000
+    MONGODB_URI=your_mongodb_connection_string
+    JWT_SECRET=your_secret_key
+    FRONTEND_URL=http://localhost:3000
+    ```
 
-### Running Tests
-```bash
-# Backend tests
-cd backend && npm test
+4.  **Run Locally**
+    ```bash
+    # Terminal 1: Backend
+    cd backend
+    npm run dev
+    
+    # Terminal 2: Frontend
+    cd frontend
+    npm run dev
+    ```
 
-# Frontend tests
-cd frontend && npm test
+---
 
-# Run all tests with coverage
-cd backend && npm run test:coverage
-cd frontend && npm run test:coverage
-```
+## 📝 Submission Details
+**Developer**: Shreyansh Gupta
+**Roll No**: 10271-22
+**Course**: B.Tech
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+*Built with passion and pixel-perfect precision.*
