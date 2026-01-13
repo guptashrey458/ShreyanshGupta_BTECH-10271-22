@@ -85,13 +85,13 @@ export default function LandingScrollAnimation({ frameCount = 25 }: LandingScrol
       // Let's stick to 'contain' for this specific task visualization so cards aren't cut off.
       // Re-calculating for 'contain':
       const scaleContain = Math.min(canvas.width / img.width, canvas.height / img.height);
-      const xContain = (canvas.width - img.width * scaleContain) / 2;
-      const yContain = (canvas.height - img.height * scaleContain) / 2;
+      const drawX = (canvas.width - img.width * scaleContain) / 2;
+      const drawY = (canvas.height - img.height * scaleContain) / 2;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = '#050505'; // Match background
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, xContain, yContain, img.width * scaleContain, img.height * scaleContain);
+      ctx.drawImage(img, drawX, drawY, img.width * scaleContain, img.height * scaleContain);
     };
 
     const unsubscribe = frameIndex.on("change", (latest) => {

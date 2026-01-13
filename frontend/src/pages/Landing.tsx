@@ -5,15 +5,13 @@ import { ArrowRight } from 'lucide-react';
 
 export default function Landing() {
   // Anti-gravity floating animation for text
-  // Anti-gravity floating animation for text
   const floatingAnimation = {
-    y: [0, -10, 0]
-  };
-
-  const floatingTransition = {
-    duration: 4,
-    repeat: Infinity,
-    ease: "easeInOut" as const
+    y: [0, -10, 0],
+    transition: {
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut" as const
+    }
   };
 
   return (
@@ -35,7 +33,6 @@ export default function Landing() {
             >
                 <motion.h1 
                     animate={floatingAnimation}
-                    transition={floatingTransition}
                     className="text-5xl md:text-8xl font-bold tracking-tighter mb-8 text-white/90"
                 >
                     Kanban Flow
@@ -60,7 +57,7 @@ export default function Landing() {
                 transition={{ duration: 1, ease: "easeOut" }}
                 className="max-w-lg"
             >
-                <motion.div animate={floatingAnimation} transition={floatingTransition}>
+                <motion.div animate={floatingAnimation}>
                     <h2 className="text-4xl md:text-7xl font-bold mb-6 tracking-tight text-white/90">
                         Personal &<br/>Intuitive
                     </h2>
@@ -80,7 +77,7 @@ export default function Landing() {
                 transition={{ duration: 1, ease: "easeOut" }}
                 className="max-w-lg text-right"
             >
-                <motion.div animate={floatingAnimation} transition={floatingTransition}>
+                <motion.div animate={floatingAnimation}>
                     <h2 className="text-4xl md:text-7xl font-bold mb-6 tracking-tight text-white/90">
                         Drag. Drop.<br/>Complete.
                     </h2>
