@@ -24,7 +24,7 @@
 **Framework Preset:** `Other` (or `Vite` if available)
 
 **Build & Development Settings:**
-- **Build Command**: `cd frontend && npm install && npx vite build`
+- **Build Command**: `cd frontend && npm install && ./node_modules/.bin/vite build`
 - **Output Directory**: `frontend/dist`
 - **Install Command**: `npm install` (leave default)
 

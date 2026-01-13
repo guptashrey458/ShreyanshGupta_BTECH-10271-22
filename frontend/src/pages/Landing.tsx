@@ -119,7 +119,6 @@ export default function Landing() {
         
         {/* Footer */}
         <div className="h-24 flex items-center justify-center border-t border-white/5 bg-black/60 backdrop-blur-md relative z-10">
-            <p className="text-white/30 text-sm tracking-wide">© 2024 Kanban Flow. Designed with focus.</p>
         </div>
       </div>
     </div>
