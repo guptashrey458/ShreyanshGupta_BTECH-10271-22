@@ -29,10 +29,10 @@ export default function LandingScrollAnimation({ frameCount = 25 }: LandingScrol
     // Helper to load a single image
     const loadImage = (index: number) => {
       const img = new Image();
-      // Frames are stored as /frames/ezgif-frame-XXX.jpg (1-indexed based on file listing)
+      // Frames are now in the root of dist after build
       // Files are ezgif-frame-001.jpg to ezgif-frame-025.jpg
       const paddedIndex = (index + 1).toString().padStart(3, '0');
-      img.src = `/frames/ezgif-frame-${paddedIndex}.jpg`;
+      img.src = `/ezgif-frame-${paddedIndex}.jpg`;
       
       img.onload = () => {
         if (isMounted) {
