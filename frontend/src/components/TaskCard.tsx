@@ -24,9 +24,10 @@ export function TaskCard({ task, index, onEdit, onDelete }: TaskCardProps) {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           className={cn(
-            "bg-card rounded-lg p-4 shadow-card transition-all duration-200 cursor-grab active:cursor-grabbing group",
-            snapshot.isDragging && "shadow-card-hover rotate-2 scale-105",
-            "hover:shadow-card-hover animate-fade-in"
+            "bg-card rounded-lg p-4 shadow-sm border border-border/50 transition-all duration-200 cursor-grab active:cursor-grabbing group",
+            "hover:shadow-md hover:border-border hover:-translate-y-0.5",
+            snapshot.isDragging && "shadow-lg rotate-1 scale-105 border-primary/30",
+            "animate-fade-in"
           )}
         >
           <div className="flex items-start justify-between gap-2 mb-2">

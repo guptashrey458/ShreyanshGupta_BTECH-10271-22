@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { LayoutGrid, Loader2 } from 'lucide-react';
+import { Kanban, CheckSquare, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function Login() {
@@ -31,19 +31,24 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4">
-      <div className="w-full max-w-md animate-slide-up">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted/20 px-4">
+      <div className="w-full max-w-md animate-fade-in">
         <div className="flex flex-col items-center mb-8">
-          <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-primary text-primary-foreground mb-4">
-            <LayoutGrid className="h-7 w-7" />
+          <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 text-primary-foreground mb-4 shadow-lg animate-bounce-in">
+            <div className="relative">
+              <Kanban className="h-7 w-7" />
+              <CheckSquare className="h-3.5 w-3.5 absolute -top-1 -right-1 text-green-400" />
+            </div>
           </div>
-          <h1 className="text-2xl font-bold text-foreground">TaskFlow</h1>
-          <p className="text-muted-foreground mt-1">Organize your work, your way</p>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            TaskFlow
+          </h1>
+          <p className="text-muted-foreground mt-1 text-center">Organize your work, your way</p>
         </div>
 
-        <Card>
-          <CardHeader className="text-center">
-            <CardTitle>Welcome back</CardTitle>
+        <Card className="shadow-xl border-0 bg-card/95 backdrop-blur-sm">
+          <CardHeader className="text-center pb-6">
+            <CardTitle className="text-2xl">Welcome back</CardTitle>
             <CardDescription>Sign in to your account to continue</CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>

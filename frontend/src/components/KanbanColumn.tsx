@@ -35,7 +35,7 @@ export function KanbanColumn({ status, title, tasks, onAddTask, onEditTask, onDe
   const styles = statusStyles[status];
 
   return (
-    <div className="flex flex-col min-w-[300px] max-w-[350px] flex-1">
+    <div className="flex flex-col flex-1 min-w-[300px] w-full md:max-w-[350px]">
       <div className="flex items-center justify-between mb-4 px-1">
         <div className="flex items-center gap-2">
           <div className={cn("w-2.5 h-2.5 rounded-full", styles.dot)} />
@@ -58,7 +58,7 @@ export function KanbanColumn({ status, title, tasks, onAddTask, onEditTask, onDe
             ref={provided.innerRef}
             {...provided.droppableProps}
             className={cn(
-              "flex-1 rounded-xl p-3 transition-colors min-h-[200px]",
+              "flex-1 rounded-xl p-3 transition-colors min-h-[200px] md:min-h-[400px]",
               styles.bg,
               styles.border,
               "border-2 border-dashed",
