@@ -1,13 +1,6 @@
 # 🌌 Kanban Flow - Cinematic Task Management System
 
-![Project Banner](https://img.shields.io/badge/Status-Production-00f2fe?style=for-the-badge) ![Tech Stack](https://img.shields.io/badge/Stack-MERN-050505?style=for-the-badge) ![License](https://img.shields.io/badge/License-MIT-white?style=for-the-badge)
-
 **Kanban Flow** is a high-performance, aesthetically stunning task management application designed with a focus on deep work and fluidity. It features a custom "anti-gravity" glassmorphic UI, seamless drag-and-drop interactions, and a robust RESTful backend.
-
----
-
-## 🚀 Live Demo
-**Production URL**: [https://shreyansh-gupta-btech-10271-22-emg6kh9tl.vercel.app](https://shreyansh-gupta-btech-10271-22-emg6kh9tl.vercel.app)
 
 ---
 
